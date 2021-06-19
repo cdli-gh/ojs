@@ -1,31 +1,25 @@
-ARG tag_name="ojs-3_1_1-4"
-ARG repo_url="https://github.com/pkp/ojs.git"
+FROM php:7.3-apache
 
-FROM alpine:latest AS CLONE_CODE
-ARG tag_name
-ARG repo_url
-RUN apk add --update-cache --no-cache git
-RUN git clone --progress -b "${tag_name}" --single-branch --depth 1 --recurse-submodules -j 4 ${repo_url} /app
+COPY . /app/tools
 
-FROM composer:1.8 AS BUILD_COMPOSER
-COPY --from=CLONE_CODE /app/ /app/
-WORKDIR /app
-RUN sudo apt-get install php-xml
-RUN composer --working-dir=lib/pkp install && 
-RUN composer --working-dir=plugins/generic/citationStyleLanguage install && 
-RUN composer --working-dir=plugins/paymethod/paypal install
+WORKDIR /app/tools
 
-FROM node:8.15-alpine AS BUILD_NODE
-COPY --from=BUILD_COMPOSER /app/ /app/
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install -y git
+RUN cp config.TEMPLATE.inc.php config.inc.php
+RUN apt-get install sudo
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');";
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer;
+RUN yes |composer --working-dir=lib/pkp install
+RUN yes | composer --working-dir=plugins/paymethod/paypal install
+RUN yes | composer --working-dir=plugins/generic/citationStyleLanguage install --ignore-platform-reqs
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - 
+RUN apt-get install -y nodejs 
 RUN npm install
 RUN npm run build
-RUN find . | grep .git | xargs rm -rf
-COPY config.TEMPLATE.inc.php config.inc.php
-
-FROM php:7.3-apache
 ENV APP_DIR=/var/www/html
 COPY . /var/www/html/
-RUN docker-php-ext-install mysqli 
+COPY config.inc.php /var/www/html
+RUN sudo chown -R www-data:www-data /var/www/html
 EXPOSE 80
 EXPOSE 8000
