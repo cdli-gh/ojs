@@ -485,7 +485,7 @@ xslt_command = ""
 show_stacktrace = Off
 
 ; Display an error message when something goes wrong.
-display_errors = Off
+display_errors = On
 
 ; Display deprecation warnings
 deprecation_warnings = Off
