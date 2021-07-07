@@ -19,7 +19,8 @@ For CDLI version, the docker version of config file has been made.
 
 OJS Setup is a three step process:
 
-# STEP-1: 
+STEP-1: 
+
 To clone ojs submodules:-
  
 1.1 Shift to the ojs directory:
@@ -34,17 +35,16 @@ To clone ojs submodules:-
 
         git submodule update
 
-# STEP-2:
+STEP-2:
 To build ojs container:-
 
-    ```
         ./cdlidev -- build ojs
-    ```
- 
-# STEP-3:
+    
+STEP-3:
+
 The ojs database is imported directly in phpmyadmin using the volume 
 
-./conf/init:/docker-entrypoint-initdb.d/:ro
+       ./conf/init:/docker-entrypoint-initdb.d/:ro
 
 Alternative way is to the import the ojs database manually.
 
@@ -76,8 +76,9 @@ Install or update dependencies via Composer (https://getcomposer.org/):
     composer --working-dir=plugins/generic/citationStyleLanguage install
 
 Install or update dependencies via [NPM](https://www.npmjs.com/):
-
-  # install [nodejs](https://nodejs.org/en/) if you don't already have it
+  
+  install [nodejs](https://nodejs.org/en/) if you don't already have it
+    
     npm install
     npm run build
 
