@@ -13,15 +13,15 @@
  * @brief DataCite export/registration plugin.
  */
 
-use PKP\file\FileManager;
-use PKP\notification\PKPNotification;
-
 use APP\facades\Repo;
-use APP\submission\Submission;
-use ArticleGalley;
-use Issue;
-
 use APP\plugins\DOIPubIdExportPlugin;
+
+use APP\submission\Submission;
+use APP\article\ArticleGalley;
+use APP\issue\Issue;
+use PKP\file\FileManager;
+
+use PKP\notification\PKPNotification;
 
 // DataCite API
 define('DATACITE_API_RESPONSE_OK', 201);

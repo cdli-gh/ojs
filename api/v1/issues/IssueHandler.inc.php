@@ -14,16 +14,16 @@
  *
  */
 
-use PKP\handler\APIHandler;
-use PKP\security\authorization\ContextRequiredPolicy;
-use PKP\security\authorization\ContextAccessPolicy;
-use PKP\security\Role;
-
+use APP\core\Services;
 use APP\security\authorization\OjsIssueRequiredPolicy;
 use APP\security\authorization\OjsJournalMustPublishPolicy;
-use APP\core\Services;
-
 use PKP\db\DAORegistry;
+
+use PKP\handler\APIHandler;
+use PKP\security\authorization\ContextAccessPolicy;
+use PKP\security\authorization\ContextRequiredPolicy;
+
+use PKP\security\Role;
 
 class IssueHandler extends APIHandler
 {
@@ -216,7 +216,7 @@ class IssueHandler extends APIHandler
             return $response->withStatus(404)->withJsonError('api.404.resourceNotFound');
         }
 
-        $userGroupDao = DAORegistry::getDAO('UserGroupDao'); /** @var UserGroupDAO $userGroupDao */
+        $userGroupDao = DAORegistry::getDAO('UserGroupDAO'); /** @var UserGroupDAO $userGroupDao */
         $userGroups = $userGroupDao->getByContextId($context->getId());
 
         $data = Services::get('issue')->getFullProperties($issue, [
@@ -246,8 +246,8 @@ class IssueHandler extends APIHandler
             return $response->withStatus(404)->withJsonError('api.404.resourceNotFound');
         }
 
-        $userGroupDao = DAORegistry::getDAO('UserGroupDao'); /** @var UserGroupDAO $userGroupDao */
-        $userGroups = $userGroupDao->getByContextId($context->getId());
+        $userGroupDao = DAORegistry::getDAO('UserGroupDAO'); /** @var UserGroupDAO $userGroupDao */
+        $userGroups = $userGroupDao->getByContextId($request->getContext()->getId());
 
         $data = Services::get('issue')->getFullProperties($issue, [
             'request' => $request,
