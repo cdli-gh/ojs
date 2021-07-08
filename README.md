@@ -19,7 +19,7 @@ For CDLI version, the docker version of config file has been made.
 
 OJS Setup is a three step process:
 
-STEP-1: 
+#### STEP-1: 
 
 To clone ojs submodules:-
  
@@ -35,12 +35,12 @@ To clone ojs submodules:-
 
         git submodule update
 
-STEP-2:
+#### STEP-2:
 To build ojs container:-
 
         ./cdlidev -- build ojs
     
-STEP-3:
+#### STEP-3:
 
 The ojs database is imported directly in phpmyadmin using the volume 
 
@@ -56,14 +56,14 @@ If it runs fine, you will be having the ojs framework running at http://127.0.0.
 
 ### 2. Running independently without docker
 
-Checkout submodules and copy default configuration :
+2.1 Checkout submodules and copy default configuration :
 
     git submodule update --init --recursive
     cp config.TEMPLATE.inc.php config.inc.php
 
-Install or update dependencies via Composer (https://getcomposer.org/):
+2.2 Install or update dependencies via Composer (https://getcomposer.org/):
 
-  Install composer 
+   Install composer 
 
     php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     php7 composer-setup.php --install-dir=/usr/local/bin --filename=composer
@@ -75,14 +75,14 @@ Install or update dependencies via Composer (https://getcomposer.org/):
     composer --working-dir=plugins/paymethod/paypal install
     composer --working-dir=plugins/generic/citationStyleLanguage install
 
-Install or update dependencies via [NPM](https://www.npmjs.com/):
+2.3 Install or update dependencies via [NPM](https://www.npmjs.com/):
   
-  install [nodejs](https://nodejs.org/en/) if you don't already have it
+  Install [nodejs](https://nodejs.org/en/) if you don't already have it
     
     npm install
     npm run build
 
-If your PHP version supports built-in development server :
+2.4 If your PHP version supports built-in development server :
 
     php -S localhost:8000
 
@@ -103,10 +103,6 @@ The image understand the following environment variables:
 
 ## Running Tests
 
-We recommend using [Travis](https://travis-ci.org/) for continuous-integration
-based testing. Review the Travis configuration file (`.travis.yml`) as a
-reference for running the test locally, should you choose to do so.
-
 The tests include an integration test suite that builds a data environment from
 scratch, including the installation process. (This is the `-b` flag to the test
 script `lib/pkp/tools/runAllTests.sh`; this is also executed in the Travis
@@ -114,7 +110,8 @@ environment.)
 
 ## Bugs / Issues
 
-See https://github.com/pkp/pkp-lib/#issues for information on reporting issues.
+See https://gitlab.com/cdli/framework/-/issues for information on reporting issues on ojs container built in cdli framework.
+See https://github.com/pkp/pkp-lib/#issues for information on reporting issues on ojs(open journal systems).
 
 ## License
 
