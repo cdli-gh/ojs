@@ -103,10 +103,6 @@ The image understand the following environment variables:
 
 ## Running Tests
 
-We recommend using [Travis](https://travis-ci.org/) for continuous-integration
-based testing. Review the Travis configuration file (`.travis.yml`) as a
-reference for running the test locally, should you choose to do so.
-
 The tests include an integration test suite that builds a data environment from
 scratch, including the installation process. (This is the `-b` flag to the test
 script `lib/pkp/tools/runAllTests.sh`; this is also executed in the Travis
@@ -114,7 +110,8 @@ environment.)
 
 ## Bugs / Issues
 
-See https://github.com/pkp/pkp-lib/#issues for information on reporting issues.
+See https://gitlab.com/cdli/framework/-/issues for information on reporting issues on ojs container built in cdli framework.
+See https://github.com/pkp/pkp-lib/#issues for information on reporting issues on ojs(open journal systems).
 
 ## License
 
